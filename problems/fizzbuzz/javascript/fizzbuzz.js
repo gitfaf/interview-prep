@@ -1,24 +1,26 @@
-function fizz (number) {
-  return number % 3 === 0 ? 'Fizz' : '';
+const fizz =  number => number % 3 === 0 ? 'Fizz' : '';
+const buzz = number => number % 5 === 0 ? 'Buzz' : '';
+
+let logic = () => [fizz, buzz];
+
+const processItem = (i, actions) => {
+  var value = actions.reduce(function (prevValue, currentAction) {
+    return prevValue + currentAction(i);
+  }, '');
+  return value.length === 0 ? i : value;
 }
 
-function buzz (number) {
-  return number % 5 === 0 ? 'Buzz' : '';
-}
-
-function logic () {
-  return [fizz, buzz];
-}
-
-function solution () {
+function solutionInclusive (start, end) {
   var actions = logic();
-  for(var i = 1; i <= 100; i++) {
-    var output = actions.reduce(function (prevValue, currentAction) {
-      return prevValue + currentAction(i);
-    }, '');
-    output = output.length === 0 ? i : output;
-    console.log(output);
+  var output = [];
+  for(var i = start; i <= end; i++) {
+    output.push(processItem(i, actions));
   }
+  return output;
 }
 
-solution();
+module.exports = {
+  logic,
+  processItem,
+  solutionInclusive
+};
