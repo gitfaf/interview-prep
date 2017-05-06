@@ -51,5 +51,6 @@ const sortPair = (input, size) => {
 };
 module.exports = {
   reversePair,
-  sortPair
+  sortPair,
+  splitArrayInPairs
 };

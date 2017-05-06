@@ -149,3 +149,24 @@ describe('sort-pair', () => {
     }
   });
 });
+
+describe('split arrays', () => {
+    it('doesn\'t split empty array', () => {
+        let input = [];
+        let expected = input;
+        let actual = lib.splitArrayInPairs(input, 2);
+        expect(actual.length).toBe(expected.length);
+        expect(actual[0]).toBe(undefined);
+    });
+    it('splits array in pairs of 2', () => {
+        let input = [ 1, 2, 3, 4, 5, 6, 7, 8];
+        let size = 2;
+        let expected = [ [1, 2], [3, 4], [5, 6], [7, 8] ];
+        let actual = lib.splitArrayInPairs(input, size);
+        for(let i = 0; i < input.length/size; i+=size) {
+            expect(actual[i].length).toBe(size);
+            expect(actual[i][0]).toBe(input[i * size]);
+            expect(actual[i][1]).toBe(input[i * size + 1]);
+        }
+    });
+});
