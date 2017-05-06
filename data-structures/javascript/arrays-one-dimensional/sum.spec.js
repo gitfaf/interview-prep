@@ -16,6 +16,40 @@ describe('sum of an array', function () {
       expect(actual).toBe(expected);
     });
   });
+  
+  describe('sumOddNumbers()', function() {
+    it('is 0 for empty array', function () {
+      var input = [];
+      var actual = sumLib.sumOddNumbers(input);
+      var expected = 0;
+      expect(actual).toBe(expected);
+    });
+    it('is equal to 0 for even only elements array', function () {
+      var input = [ 0, 2, 4, 6, 8, 10 ];
+      var actual = sumLib.sumOddNumbers(input);
+      var expected = 0;
+      expect(actual).toBe(expected);
+    });
+    it('is equal to sum-of-array for odd only elements array', function () {
+      var input = [ 1, 3, 5, 7, 9 ];
+      var actual = sumLib.sumOddNumbers(input);
+      var expected = sumLib.sum(input); // assume external library
+      expect(actual).toBe(expected);
+    });
+    it('is equal to 25 for positive single-digit odd-numbers only elements array', function () {
+      var input = [ 1, 3, 5, 7, 9 ];
+      var actual = sumLib.sumOddNumbers(input);
+      var expected = 25;
+      expect(actual).toBe(expected);
+    });
+    it('is equal to 25 for non-negative single-digit numbers only elements array', function () {
+      var input = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ];
+      var actual = sumLib.sumOddNumbers(input);
+      var expected = 25;
+      expect(actual).toBe(expected);
+    });
+  });
+
   describe('sumEvenNumbers()', function() {
     it('is 0 for empty array', function () {
       var input = [];
