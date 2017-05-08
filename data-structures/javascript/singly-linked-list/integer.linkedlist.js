@@ -1,14 +1,6 @@
 'use strict';
 
-class Node {
-  constructor(value) {
-    if(typeof value !== typeof 1) {
-      throw new TypeError('Only integers are accepted.');
-    }
-    this.value = value;
-    this.next = null;
-  }
-}
+const Node = require('./integer.linkedlist.node');
 
 class LinkedList {
   constructor() {
@@ -38,19 +30,6 @@ class LinkedList {
     }
     return values;
   }
-  deserialize (deserializableObj) {
-    var values = JSON.parse(deserializableObj).values;
-    var list = new LinkedList();
-    values.forEach(v => list.append(v));
-    return list;
-  }
-  print () {
-    var current = this.root;
-    while(current) {
-      console.log(current.value);
-      current = current.next;
-    }
-  }
   getRoot () {
     return this.root;
   }
@@ -59,28 +38,4 @@ class LinkedList {
   }
 }
 
-class LinkedListSerializer {
-  constructor(list) {
-    this.list = list;
-    this.serialized = null;
-  }
-  serialize () {
-    var values = this.list.getValues();
-    var obj = { values };
-    this.serialized = JSON.stringify(obj);
-  }
-}
-
-function createSampleLinkedList () {
-  var values = [1, 2, 3, 4, 5];
-  var list = new LinkedList();
-  if(list.isEmpty()) {
-    list.createList(0);
-  }
-  values.forEach((i) => list.append(i));
-  list.print();
-
-  var serialized = list.serialize();
-  console.log(serialized);
-  list.deserialize(serialized).print();
-}
+module.exports = LinkedList;
