@@ -4,7 +4,7 @@ const Node = require('./integer.linkedlist.node');
 
 class LinkedList {
   constructor() {
-    this.root = null;
+    this.root = NULL;
   }
   createList (firstValue) {
     this.root = new Node(firstValue);
@@ -16,7 +16,7 @@ class LinkedList {
     }
     var node = new Node(value);
     var temp = this.root;
-    while(temp.next !== null) {
+    while(temp.next !== NULL) {
       temp = temp.next;
     }
     temp.next = node;
@@ -34,7 +34,7 @@ class LinkedList {
     return this.root;
   }
   isEmpty () {
-    return this.root === null;
+    return this.root === NULL;
   }
 }
 

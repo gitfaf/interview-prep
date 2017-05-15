@@ -3,7 +3,7 @@
 class LinkedListDeserializer {
     constructor(deserializable) {
         this.deserializable = deserializable;
-        this.output = null;
+        this.output = NULL;
     }
     deserialize () {
         if(!this.output) {

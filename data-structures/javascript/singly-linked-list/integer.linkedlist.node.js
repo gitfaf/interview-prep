@@ -6,7 +6,7 @@ class Node {
       throw new TypeError('Only integers are accepted.');
     }
     this.value = value;
-    this.next = null;
+    this.next = NULL;
   }
 }
 

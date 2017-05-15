@@ -3,7 +3,7 @@
 class LinkedListSerializer {
     constructor(list) {
         this.list = list;
-        this.serialized = null;
+        this.serialized = NULL;
     }
     serialize() {
         if(!this.serialized) {
