@@ -2,3 +2,5 @@
 typescript/*.js
 
 node_modules/
+
+*.out
