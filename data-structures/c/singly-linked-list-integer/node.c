@@ -24,16 +24,20 @@ struct node * clone_node (struct node * clone_this) {
 }
 
 void append_node (struct node * root, struct node * toAppend) {
-    struct node * tmp = root;
-    while(tmp -> next) {
-        tmp = tmp -> next;
+    if(root && toAppend) {
+        struct node * tmp = root;
+        while(tmp -> next) {
+            tmp = tmp -> next;
+        }
+        tmp -> next = toAppend;
     }
-    tmp -> next = toAppend;
 }
 
 void append (struct node * root, int value) {
-    struct node * tmp = create_node(value);
-    append_node(root, tmp);
+    if(root) {
+        struct node * tmp = create_node(value);
+        append_node(root, tmp);
+    }
 }
 
 int * to_array (struct node * root, int count) {

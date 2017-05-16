@@ -29,7 +29,7 @@ void test_3 () {
 
 /* append_node */
 
-void test_4 () {
+void test_append_node_1 () {
     int value = 10;
     struct node * tmp;
     struct node * root = create_node(value);
@@ -44,6 +44,32 @@ void test_4 () {
     assert(root -> next != NULL);
     assert(root -> next == tmp);
     assert(root -> next -> value == root -> value * root -> value);
+}
+
+/* append */
+void test_append_1 () {
+    /* test that append node has correct value */
+    int value = 2;
+    struct node * root = create_node(value);
+    append(root, value * 2);
+    assert(root -> next -> value == value * 2);
+}
+
+void test_append_2 () {
+    /* test that appended node has no next */
+    int value = 2;
+    struct node * root = create_node(value);
+    append(root, value * 2);
+    assert(root -> next -> next == NULL);
+}
+
+void test_append_3 () {
+    /* test that appending to null node results in no action */
+    int value = 2;
+    struct node * root = NULL;
+    append(root, value * 2);
+    assert(root == NULL);
+    /* since root is still null; we cannot have next */
 }
 
 /* to_array */

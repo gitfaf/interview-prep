@@ -8,9 +8,11 @@ int main () {
     test_1();
     test_2();
     test_3();
-    test_4();
+    test_append_node_1();
     test_5();
     test_6();
+    test_append_1();
+    test_append_2();
     printf("}END]\n");
     return 0;
 }
