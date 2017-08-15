@@ -1,4 +1,4 @@
-function generateRandomExpression(number) {
+function shortestExpression(target) {
     const steps = [{
             action: x => x * 3,
             update: history => `(${history} * 3)`
@@ -13,21 +13,14 @@ function generateRandomExpression(number) {
         }
     ];
 
-    function executeStepsRandomlyAndPickOne(current, history) {
-        let values = steps
-            .filter(step => step.action(current) <= number)
-            .map(step => nextStep(step.action(current), step.update(history)));
-        return values[Math.floor(Math.random() * values.length)];
-    }
-
     function nextStep(current, history) {
-        if (current > number) {
+        if (current > target) {
             return null;
         }
-        if (current === number) {
+        if (current === target) {
             return history;
         }
-        return executeStepsRandomlyAndPickOne(current, history);
+        return steps.reduce((acc, step) => acc || nextStep(step.action(current), step.update(history)), null);
     }
     return nextStep(1, `1`);
 }
