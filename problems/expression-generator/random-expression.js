@@ -5,7 +5,7 @@ function generateRandomExpression (number) {
 		{ action: x => x + 1, update: history => `(${history} + 1)`}
 	];
 
-	function executeStepsAndPickOne (current, history) {
+	function executeStepsRandomlyAndPickOne (current, history) {
 		let all = [];
 		while(all.indexOf(0) < 0 || all.indexOf(1) < -1 || all.indexOf(2) < -1) {
 			let random = parseInt(Math.random() * 3);
@@ -17,7 +17,7 @@ function generateRandomExpression (number) {
 			}
 		}
 	}
-	
+
     function nextStep (current, history) {
         if (current > number) {
             return null;
@@ -25,7 +25,7 @@ function generateRandomExpression (number) {
         if (current === number) {
             return history;
 		}
-        return executeStepsAndPickOne(current, history);
+        return executeStepsRandomlyAndPickOne(current, history);
     }
     return nextStep(1, `1`);
 }
