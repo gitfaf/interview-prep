@@ -14,12 +14,10 @@ function generateRandomExpression(number) {
     ];
 
     function executeStepsRandomlyAndPickOne(current, history) {
-        let value = null;
-        do {
-            let step = steps[Math.floor(Math.random() * steps.length)];
-            value = nextStep(step.action(current), step.update(history));
-        } while (!value);
-        return value;
+		let values = steps
+			.filter(step => step.action(current) <= number)
+			.map(step => nextStep(step.action(current), step.update(history)));
+        return values[Math.floor(Math.random() * values.length)];
     }
 
     function nextStep(current, history) {
