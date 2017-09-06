@@ -10,6 +10,10 @@
 
 /** PUBLIC fn
  * rotates array left once
+ * @example
+ * rotateLeftOnce([1, 2, 3, 4, 5]) === [2, 3, 4, 5, 1]
+ * @example
+ * rotateLeftOnce([]) === []
  * @param {Array} array - Array to be rotated.
  * @returns {Array} - Returns once left-rotated array 
  */
@@ -23,6 +27,8 @@ function rotateLeftOnce(array) {
 
 /** PUBLIC fn
  * rotates array right once
+ * @example rotateRightOnce([1, 2, 3, 4, 5]) === [5, 1, 2, 3, 4]
+ * @example rotateRightOnce([]) === []
  * @param {Array} array - Array to be rotated.
  * @returns {Array} - Returns once right-rotated array 
  */
@@ -36,7 +42,8 @@ function rotateRightOnce(array) {
 
 /** PRIVATE FN
  * rotate an array, n times, as per rotation logic.
- * @example rotate([1, 2, 3, 4], 2, rotateLeftOnce);
+ * @example rotate([1, 2, 3, 4, 5], 2, rotateLeftOnce); returns [3, 4, 5, 1, 2]
+ * @example rotate([1, 2, 3, 4, 5], 2, rotateRightOnce); returns [4, 5, 1, 2, 3]
  * @param {Array} array - The array to rotate
  * @param {Number} times - Number of times it should be rotated.
  * @param {Function} rotation - Logic, how to rotate.
