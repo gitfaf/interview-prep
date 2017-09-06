@@ -7,6 +7,35 @@
  * times = times % array.length;
  * */
 
+/**
+ * PRIVATE fn
+ * @async @function
+ * @param {Array} array - Array to be rotated by block swap
+ * @param {Number} blockSize - The size of the block; should be less than length of array.
+ * @example blockSwapLeft([1, 2, 3, 4, 5], 3) returns [4, 5, 1, 2, 3]
+ * @returns {Array} - Rotated array.
+ */
+async function blockSwapLeft(array, blockSize) {
+    let len = array.length;
+    let left = array.splice(0, blockSize);
+    array.push(...left);
+    return array;
+}
+
+/**
+ * PRIVATE fn
+ * @async @function
+ * @param {Array} array - Array to be rotated by block swap
+ * @param {Number} blockSize - The size of the block; should be less than length of array.
+ * @example blockSwapRight([1, 2, 3, 4, 5], 3) returns [3, 4, 5, 1, 2]
+ * @returns {Array} - Rotated array.
+ */
+async function blockSwapRight(array, blockSize) {
+    let len = array.length;
+    let right = array.splice(len - blockSize, blockSize);
+    array.unshift(...right);
+    return array;
+}
 
 /** PUBLIC fn
  * rotates array left once
@@ -43,10 +72,10 @@ async function rotateRightOnce(array) {
 }
 
 /** PRIVATE FN
+ * @async @deprecated @function
  * rotate an array, n times, as per rotation logic.
  * @example rotate([1, 2, 3, 4, 5], 2, rotateLeftOnce); returns [3, 4, 5, 1, 2]
  * @example rotate([1, 2, 3, 4, 5], 2, rotateRightOnce); returns [4, 5, 1, 2, 3]
- * @async
  * @param {Array} array - The array to rotate
  * @param {Number} times - Number of times it should be rotated.
  * @param {Function} rotation - Logic, how to rotate.
@@ -64,15 +93,15 @@ async function rotate(array, times, rotation) {
 }
 
 /** PUBLIC fn
+ * @async
  * Left rotates array a number of times
  * Works only when times > 0 and array.length > 1
  * @param {Array} array - Array to be rotated.
  * @param {Number} times - Number of times array should be rotated; default = 1
  * @returns {Array} - Returns times left-rotated array 
- * @async
  */
 async function rotateLeft(array, times = 1) {
-    return times > 0 && array.length > 1 ? await rotate(array, times, rotateLeftOnce) : array;
+    return times > 0 && array.length > 1 ? await blockSwapLeft(array, times) : array;
 }
 
 /** PUBLIC fn
@@ -84,7 +113,7 @@ async function rotateLeft(array, times = 1) {
  * @async
  */
 async function rotateRight(array, times = 1) {
-    return times > 0 && array.length > 1 ? await rotate(array, times, rotateRightOnce) : array;
+    return times > 0 && array.length > 1 ? await blockSwapRight(array, times) : array;
 }
 
 module.exports = {
