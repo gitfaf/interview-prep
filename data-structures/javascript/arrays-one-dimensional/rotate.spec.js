@@ -1,14 +1,34 @@
 let lib = require('./rotate');
 
-describe('rotating arrays to the left', () => {
+/* NOTE
+ * Following will not work, different objects.
+ * expect(actual).toBe(expected);
+ * */
+
+/* Edge case - Empty array rotation */
+describe('empty array rotations', () => {
+    it('rotateLeftOnce should return empty array', () => {
+        const array = [];
+        const actual = lib.rotateLeftOnce(array);
+        const expected = [];
+        expect(actual.length).toBe(expected.length);
+        expect(actual[0]).toBe(undefined);
+    });
+    it('rotateRightOnce should return empty array', () => {
+        const array = [];
+        const actual = lib.rotateRightOnce(array);
+        const expected = [];
+        expect(actual.length).toBe(expected.length);
+        expect(actual[0]).toBe(undefined);
+    });
+});
+
+describe('rotating arrays to the left', () => {  
     describe('rotating once', () => {
         it('rotates array once successfully', () => {
             const array = [1, 2, 3, 4, 5];
             const actual = lib.rotateLeftOnce(array);
             const expected = [2, 3, 4, 5, 1];
-            /* This will not work, different objects.
-            expect(actual).toBe(expected); */
-
             expect(actual.length).toBe(expected.length);
 
             for (let i = 0; i < actual.length; i++) {
