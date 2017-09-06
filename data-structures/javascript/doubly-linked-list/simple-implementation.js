@@ -1,3 +1,4 @@
+/* paste as a snippet in chrome */
 class Node {
     constructor(value, prev, next) {
         this.prev = prev || null;
@@ -13,10 +14,14 @@ class Node {
     toString() {
         let str = '';
         if (this.prev) {
-            str += ' -> ';
+            str += ' <- ';
+        } else {
+            str += ' null <- ';
         }
         str += this.value;
-        if (!this.next) {
+        if (this.next) {
+            str += ' -> ';
+        } else {
             str += ' -> null';
         }
         return str;
@@ -66,7 +71,7 @@ class DoublyLinkedList {
     toString() {
         let tmp = this.first;
         let str = '';
-        while(tmp) {
+        while (tmp) {
             str += tmp.toString();
             tmp = tmp.next;
         }
@@ -75,11 +80,37 @@ class DoublyLinkedList {
     toValue() {
         let value = [];
         let tmp = this.first;
-        while(tmp) {
+        while (tmp) {
             value.push(tmp.toValue());
             tmp = tmp.next;
         }
         return value;
+    }
+    rotateLeft(times = 1) {
+        times = times % this.length;
+        for (let i = 0; i < times; i++) {
+            this.makeCircular();
+            this.last = this.last.prev;
+            this.first = this.first.prev;
+            this.breakCircular();
+        }
+    }
+    rotateRight(times = 1) {
+        times = times % this.length;
+        for (let i = 0; i < times; i++) {
+            this.makeCircular();
+            this.first = this.first.next;
+            this.last = this.last.next;
+            this.breakCircular();
+        }
+    }
+    makeCircular() {
+        this.last.next = this.first;
+        this.first.prev = this.last;
+    }
+    breakCircular() {
+        this.last.next = null;
+        this.first.prev = null;
     }
 }
 
@@ -125,13 +156,57 @@ class DoublyLinkedListTests {
     static test4() {
         console.log('test4:');
         let list = new DoublyLinkedList(new Node(11));
-                list.append(new Node(12));
-                list.append(new Node(13));
-                list.append(new Node(13));
-                list.append(new Node(14));
+        list.append(new Node(12));
+        list.append(new Node(13));
+        list.append(new Node(13));
+        list.append(new Node(14));
 
         console.log(1 + list);
         console.log("abc" + list);
+    }
+    static test5_rotateLeft() {
+        console.log('test5_rotateLeft:');
+        let list = new DoublyLinkedList(new Node(10));
+        list.append(new Node(20));
+        list.append(new Node(30));
+        list.append(new Node(31));
+        list.append(new Node(40));
+        console.log('list:', list, 'original list:', list.toString());
+        list.rotateLeft();
+        console.log('list:', list, 'list.rotateLeft():', list.toString());
+    }
+    static test6_rotateLeft3() {
+        console.log('test6_rotateLeft3:');
+        let list = new DoublyLinkedList(new Node(10));
+        list.append(new Node(20));
+        list.append(new Node(30));
+        list.append(new Node(31));
+        list.append(new Node(40));
+        console.log('list:', list, 'original list:', list.toString());
+        list.rotateLeft(3);
+        console.log('list:', list, 'list.rotateLeft(3):', list.toString());
+    }
+    static test7_rotateRight() {
+        console.log('test7_rotateRight:');
+        let list = new DoublyLinkedList(new Node(10));
+        list.append(new Node(20));
+        list.append(new Node(30));
+        list.append(new Node(31));
+        list.append(new Node(40));
+        console.log('list:', list, 'original list:', list.toString());
+        list.rotateRight();
+        console.log('list:', list, 'list.rotateRight():', list.toString());
+    }
+    static test8_rotateRight3() {
+        console.log('test8_rotateRight3:');
+        let list = new DoublyLinkedList(new Node(10));
+        list.append(new Node(20));
+        list.append(new Node(30));
+        list.append(new Node(31));
+        list.append(new Node(40));
+        console.log('list:', list, 'original list:', list.toString());
+        list.rotateRight(3);
+        console.log('list:', list, 'list.rotateRight(3):', list.toString());
     }
 }
 
@@ -140,3 +215,7 @@ DoublyLinkedListTests.test1()
 DoublyLinkedListTests.test2_toString();
 DoublyLinkedListTests.test3_toValue();
 DoublyLinkedListTests.test4();
+DoublyLinkedListTests.test5_rotateLeft();
+DoublyLinkedListTests.test6_rotateLeft3();
+DoublyLinkedListTests.test7_rotateRight();
+DoublyLinkedListTests.test8_rotateRight3();
