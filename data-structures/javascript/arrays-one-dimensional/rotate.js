@@ -116,9 +116,40 @@ async function rotateRight(array, times = 1) {
     return times > 0 && array.length > 1 ? await blockSwapRight(array, times) : array;
 }
 
+/**
+ * @async @function degreeOfRotation find the rotation count of an array
+ * @param {Array} array rotated array
+ * @returns {Number} degree/times input array was rotated
+ */
+async function degreeOfRotation(array) {
+    if (!array || array.length <= 2) {
+        return 0;
+    }
+    let i = 0;
+    let len = array.length;
+    let a = array[0];
+    let b = array[1];
+    if (a < b) {
+        while (a < b) {
+            a = array[i];
+            b = array[i + 1];
+            i++;
+        }
+    } else if (a > b) {
+        while (a > b) {
+            a = array[i];
+            b = array[i + 1];
+            i++;
+        }
+    }
+    i = i > len / 2 ? len - i : i;
+    return i % len;
+}
+
 module.exports = {
     rotateLeftOnce,
     rotateLeft,
     rotateRightOnce,
-    rotateRight
+    rotateRight,
+    degreeOfRotation
 };

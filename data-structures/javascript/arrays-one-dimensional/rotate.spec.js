@@ -123,3 +123,26 @@ describe('rotating arrays to the right', () => {
         });
     });
 });
+
+describe('degree of rotation', () => {
+    it('finds degree of rotation to be 0 for ascending sorted array.', async () => {
+        let actual = await lib.degreeOfRotation([1, 2, 3, 4, 5]);
+        let expected = 0;
+        expect(actual).toBe(expected);
+    });
+    it('finds degree of rotation to be 0 for descending sorted array', async () => {
+        let actual = await lib.degreeOfRotation([5, 4, 3, 2, 1]);
+        let expected = 0;
+        expect(actual).toBe(expected);
+    });
+    it('finds degree of rotation to be 1 for once left rotated ascending sorted array.', async () => {
+        let actual = await lib.degreeOfRotation([2, 3, 4, 5, 1]);
+        let expected = 1;
+        expect(actual).toBe(expected);
+    });
+    it('finds degree of rotation to be 1 for left rotated descending sorted array', async () => {
+        let actual = await lib.degreeOfRotation([4, 3, 2, 1, 5]);
+        let expected = 1;
+        expect(actual).toBe(expected);
+    });
+})
